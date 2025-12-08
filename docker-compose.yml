@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # 1. Database Service
+  db:
+    image: postgres:15
+    container_name: employee_db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: employees_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Load script init.sql otomatis saat pertama kali jalan
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # 2. Backend Service
+  backend:
+    build: ./backend
+    container_name: employee_backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      # Perhatikan: hostnya 'db', bukan 'localhost'
+      DATABASE_URL: "postgresql://user:password@db:5432/employees_db?schema=public"
+    depends_on:
+      - db
+
+  # 3. Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: employee_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
