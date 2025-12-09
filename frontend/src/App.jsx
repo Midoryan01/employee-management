@@ -40,9 +40,8 @@ function App() {
       <div className="flex min-h-screen bg-gray-50 font-sans">
         <Sidebar />
         <div className="flex-1 overflow-auto relative">
-            {/* Pasang Toaster di sini */}
             <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-            
+
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/employees" element={<EmployeeList />} />
