@@ -1,6 +1,6 @@
 # 🚀 Sistem Manajemen Karyawan (Employee Management System)
 
-Aplikasi web *Full Stack* modern untuk mengelola data karyawan, dilengkapi dengan Dashboard Analitik. Proyek ini dibangun sebagai submisi untuk **FSE Internship Test Case**.
+Aplikasi web *Full Stack* modern untuk mengelola data karyawan, dilengkapi dengan Dashboard Analitik. 
 
 Aplikasi ini dirancang menggunakan arsitektur *Client-Server* terpisah (Decoupled) dan dikemas menggunakan **Docker** untuk kemudahan deployment.
 
@@ -68,14 +68,12 @@ Aplikasi ini dirancang menggunakan arsitektur *Client-Server* terpisah (Decouple
 ## ⚙️ Prasyarat (Prerequisites)
 
 Sebelum menjalankan aplikasi, pastikan komputer Anda sudah terinstal:
-1.  **[Docker Desktop](https://www.docker.com/products/docker-desktop/)** (Wajib - pastikan statusnya *Running*).
+1.  **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**.
 2.  **Git**.
-
+3. **(Opsional)** Node.js jika ingin menjalankan tanpa Docker
 ---
 
 ## 🚀 Cara Instalasi & Menjalankan (Metode Docker)
-
-Aplikasi ini dirancang untuk berjalan dengan satu perintah mudah.
 
 1.  **Clone Repository**
     ```bash
@@ -88,7 +86,6 @@ Aplikasi ini dirancang untuk berjalan dengan satu perintah mudah.
     ```bash
     docker-compose up --build
     ```
-    *(Tunggu beberapa menit saat proses download image dan instalasi dependensi selesai).*
 
 3.  **Akses Aplikasi**
     * **Frontend (Web UI):** Buka [http://localhost:5173](http://localhost:5173)
@@ -121,6 +118,35 @@ Berikut adalah daftar endpoint REST API yang tersedia di Backend:
 
 ---
 
+# 🧪 Contoh Request (cURL)
+
+Anda dapat menyalin dan menjalankan perintah berikut untuk menguji API secara manual.
+
+---
+
+## 1. Tambah Karyawan Baru (POST)
+
+```bash
+curl -X POST http://localhost:5000/api/employees \
+-H "Content-Type: application/json" \
+-d '{"name": "Budi Santoso", 
+    "email": "budi@test.com", 
+    "position": "Dev", 
+    "department": "IT", 
+    "salary": 9000000, 
+    "hire_date": "2024-01-01"}'
+```
+
+## 2. Update Data Karyawan (PUT)
+
+curl -X PUT http://localhost:5000/api/employees/1 \
+-H "Content-Type: application/json" \
+-d '{"status": "inactive", "salary": 10000000}'
+
+
+## 3. Hapus Karyawan (DELETE)
+curl -X DELETE http://localhost:5000/api/employees/1
+
 ## 📂 Struktur Proyek
 
 ```text
@@ -139,5 +165,7 @@ employee-management/
 │   └── Dockerfile          # Konfigurasi Image Frontend
 ├── database/
 │   └── init.sql            # Script SQL untuk Seeding Data Awal
+├── screenshots/            # kumpulan gambar aplikasi
+├──.env.example             # Template contoh konfigurasi env
 ├── docker-compose.yml      # Orkestrasi Container (DB + Backend + Frontend)
 └── README.md               # Dokumentasi Proyek
