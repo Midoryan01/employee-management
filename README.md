@@ -16,7 +16,6 @@ Aplikasi ini dirancang menggunakan arsitektur *Client-Server* terpisah (Decouple
 |:----------------:|:----------------:|
 | ![Form](./screenshots/form.png) | ![Delete](./screenshots/delete.png) |
 
-*(Catatan: Screenshot disimpan dalam folder `screenshots` di root project)*
 
 ---
 
